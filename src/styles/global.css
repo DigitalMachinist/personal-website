@@ -1,0 +1,96 @@
+/* ===== Reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Color Tokens ===== */
+:root {
+  --bg-deep: #1B1B1E;
+  --bg-surface: #28282C;
+  --bg-elevated: #232326;
+  --text-primary: #F0EDE8;
+  --text-secondary: #9A9A9A;
+  --text-dim: #6A6A6A;
+  --accent: #C88038;
+  --accent-hover: #D4883E;
+  --accent-secondary: #5D8A6C;
+  --divider: rgba(184, 115, 51, 0.2);
+  --card-border: rgba(184, 115, 51, 0.15);
+  --accent-glow: rgba(184, 115, 51, 0.25);
+  --accent-subtle: rgba(184, 115, 51, 0.08);
+  --dot-opacity: 0.06;
+  --spotlight-color: rgba(184, 115, 51, 0.04);
+  --noise-opacity: 0.03;
+  --transition: 0.4s;
+}
+
+[data-theme="light"] {
+  --bg-deep: #F5F0EB;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #EDE7E0;
+  --text-primary: #2C2C2C;
+  --text-secondary: #6B6B6B;
+  --text-dim: #595959;
+  --accent: #A0622D;
+  --accent-hover: #B8652A;
+  --accent-secondary: #4D7A5C;
+  --divider: rgba(184, 115, 51, 0.25);
+  --card-border: rgba(184, 115, 51, 0.2);
+  --accent-glow: rgba(184, 115, 51, 0.15);
+  --accent-subtle: rgba(184, 115, 51, 0.06);
+  --dot-opacity: 0.04;
+  --spotlight-color: rgba(184, 115, 51, 0.03);
+  --noise-opacity: 0.02;
+}
+
+/* ===== Typography ===== */
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--bg-deep);
+  transition: background var(--transition) ease, color var(--transition) ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Background Layers ===== */
+
+/* Radial spotlight */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 30%,
+    var(--spotlight-color) 0%,
+    transparent 70%
+  );
+  transition: background var(--transition) ease;
+}
+
+/* Dot grid */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--accent) 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+  opacity: var(--dot-opacity);
+  transition: opacity var(--transition) ease;
+}
+
+/* ===== Layout ===== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}

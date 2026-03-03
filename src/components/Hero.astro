@@ -1,0 +1,171 @@
+<section class="hero" aria-label="Introduction">
+  <div class="hero-content container">
+    <h1 class="hero-name">Jeff Rose</h1>
+    <div class="hero-handle">Digital Machinist</div>
+    <p class="hero-tagline">Building systems that work for everyone</p>
+    <p class="hero-role">Staff Software Engineer | Regulated Financial Systems · Game Development | Laravel Specialist</p>
+
+    <div class="hero-divider" aria-hidden="true"></div>
+
+    <div class="contact-block" id="contact" role="list" aria-label="Contact information">
+      <div class="contact-line" role="listitem">
+        <span class="cl">EMAIL</span>
+        <a href="mailto:jrose0@gmail.com">jrose0@gmail.com</a>
+      </div>
+      <div class="contact-line" role="listitem">
+        <span class="cl">GITHUB</span>
+        <a href="https://github.com/DigitalMachinist" target="_blank" rel="noopener noreferrer">
+          github.com/DigitalMachinist
+        </a>
+      </div>
+      <div class="contact-line" role="listitem">
+        <span class="cl">LINKEDIN</span>
+        <a href="https://linkedin.com/in/jrose0" target="_blank" rel="noopener noreferrer">
+          linkedin.com/in/jrose0
+        </a>
+      </div>
+      <div class="contact-line" role="listitem">
+        <span class="cl">HOME</span>
+        <span>Toronto, ON</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 0 80px;
+    position: relative;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Large name with subtle glow */
+  .hero-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 8vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-name::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.4;
+  }
+
+  /* Handle with flanking lines */
+  .hero-handle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-handle::before,
+  .hero-handle::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.4;
+  }
+
+  .hero-tagline {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .hero-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+  }
+
+  /* Divider */
+  .hero-divider {
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.35;
+    margin: 32px 0;
+  }
+
+  /* Contact block */
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .contact-line {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+
+  .cl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    width: 68px;
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  .contact-line a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .contact-line a:hover {
+    color: var(--accent-hover);
+  }
+
+  .contact-line a:focus-visible {
+    color: var(--accent-hover);
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
