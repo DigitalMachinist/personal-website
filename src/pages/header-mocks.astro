@@ -1,0 +1,760 @@
+---
+import Base from '../layouts/Base.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+---
+
+<Base title="Header Mocks">
+  <!-- A: Name + Slash (blend of both favorites) -->
+  <header class="mock-header mock-a" id="mock-a">
+    <span class="nav-name-a">JR</span>
+    <nav class="mock-nav-a">
+      <a href="#" class="nav-link-a">Articles</a>
+      <span class="nav-sep-a" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-a">Game Jams</a>
+      <span class="nav-sep-a" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-a">Projects</a>
+      <span class="nav-sep-a" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-a">Resume</a>
+    </nav>
+    <ThemeToggle />
+  </header>
+
+  <!-- B: Full Name Left -->
+  <header class="mock-header mock-b" id="mock-b" style="display:none">
+    <a href="#" class="nav-name-b">Jeff Rose</a>
+    <nav class="mock-nav-b">
+      <a href="#" class="nav-link-b">Articles</a>
+      <a href="#" class="nav-link-b">Game Jams</a>
+      <a href="#" class="nav-link-b">Projects</a>
+      <a href="#" class="nav-link-b">Resume</a>
+    </nav>
+    <ThemeToggle />
+  </header>
+
+  <!-- C: Handle Left -->
+  <header class="mock-header mock-c" id="mock-c" style="display:none">
+    <span class="nav-name-c">digitalmachinist</span>
+    <nav class="mock-nav-c">
+      <a href="#" class="nav-link-c">Articles</a>
+      <a href="#" class="nav-link-c">Game Jams</a>
+      <a href="#" class="nav-link-c">Projects</a>
+      <a href="#" class="nav-link-c">Resume</a>
+    </nav>
+    <ThemeToggle />
+  </header>
+
+  <!-- D: Path Style -->
+  <header class="mock-header mock-d" id="mock-d" style="display:none">
+    <nav class="mock-nav-d">
+      <span class="nav-prefix-d" aria-hidden="true">~/</span>
+      <a href="#" class="nav-link-d">articles</a>
+      <span class="nav-sep-d" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-d">game-jams</a>
+      <span class="nav-sep-d" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-d">projects</a>
+      <span class="nav-sep-d" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-d">resume</a>
+    </nav>
+    <ThemeToggle />
+  </header>
+
+  <!-- E: Initials Box + Slash Right -->
+  <header class="mock-header mock-e" id="mock-e" style="display:none">
+    <span class="nav-name-e">JR</span>
+    <nav class="mock-nav-e">
+      <a href="#" class="nav-link-e">Articles</a>
+      <span class="nav-sep-e" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-e">Game Jams</a>
+      <span class="nav-sep-e" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-e">Projects</a>
+      <span class="nav-sep-e" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-e">Resume</a>
+    </nav>
+    <ThemeToggle />
+  </header>
+
+  <!-- F: Serif Name + Mono Slash Nav -->
+  <header class="mock-header mock-f" id="mock-f" style="display:none">
+    <a href="#" class="nav-name-f">Jeff Rose</a>
+    <nav class="mock-nav-f">
+      <a href="#" class="nav-link-f">articles</a>
+      <span class="nav-sep-f" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-f">game jams</a>
+      <span class="nav-sep-f" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-f">projects</a>
+      <span class="nav-sep-f" aria-hidden="true">/</span>
+      <a href="#" class="nav-link-f">resume</a>
+    </nav>
+    <ThemeToggle />
+  </header>
+
+  <!-- G: Name + Nav (original favorite, kept for reference) -->
+  <header class="mock-header mock-g" id="mock-g" style="display:none">
+    <span class="nav-name-g">JR</span>
+    <nav class="mock-nav-g">
+      <a href="#" class="nav-link-g">Articles</a>
+      <a href="#" class="nav-link-g">Game Jams</a>
+      <a href="#" class="nav-link-g">Projects</a>
+      <a href="#" class="nav-link-g">Resume</a>
+    </nav>
+    <ThemeToggle />
+  </header>
+
+  <!-- H: Name + Accent Divider + Nav -->
+  <header class="mock-header mock-h" id="mock-h" style="display:none">
+    <span class="nav-name-h">JR</span>
+    <span class="nav-divider-h" aria-hidden="true"></span>
+    <nav class="mock-nav-h">
+      <a href="#" class="nav-link-h">Articles</a>
+      <a href="#" class="nav-link-h">Game Jams</a>
+      <a href="#" class="nav-link-h">Projects</a>
+      <a href="#" class="nav-link-h">Resume</a>
+    </nav>
+    <div class="nav-spacer-h"></div>
+    <ThemeToggle />
+  </header>
+
+  <!-- Hero section for context -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-content container">
+      <h1 class="hero-name">Jeff Rose</h1>
+      <div class="hero-handle">Digital Machinist</div>
+      <p class="hero-tagline">Building systems that work for everyone</p>
+      <p class="hero-role">Staff Software Engineer · Laravel Specialist | Regulated Financial Systems · Game Development</p>
+      <div class="hero-divider" aria-hidden="true"></div>
+      <div class="contact-block">
+        <div class="contact-line"><span class="cl">EMAIL</span><a href="#">jrose0@gmail.com</a></div>
+        <div class="contact-line"><span class="cl">GITHUB</span><a href="#">github.com/DigitalMachinist</a></div>
+        <div class="contact-line"><span class="cl">LINKEDIN</span><a href="#">linkedin.com/in/jrose0</a></div>
+        <div class="contact-line"><span class="cl">HOME</span><span>Toronto, ON</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Switcher -->
+  <div class="mock-switcher">
+    <div class="mock-label">Header Style</div>
+    <div class="mock-buttons">
+      <button class="mock-btn active" data-mock="a">
+        <span class="mock-btn-name">Name + Slash</span>
+        <span class="mock-btn-detail">JR left, slash nav centered</span>
+      </button>
+      <button class="mock-btn" data-mock="b">
+        <span class="mock-btn-name">Full Name</span>
+        <span class="mock-btn-detail">"Jeff Rose" serif left, sans nav right</span>
+      </button>
+      <button class="mock-btn" data-mock="c">
+        <span class="mock-btn-name">Handle Left</span>
+        <span class="mock-btn-detail">digitalmachinist mono left, nav centered</span>
+      </button>
+      <button class="mock-btn" data-mock="d">
+        <span class="mock-btn-name">Path Style</span>
+        <span class="mock-btn-detail">~/ prefix, lowercase kebab links</span>
+      </button>
+      <button class="mock-btn" data-mock="e">
+        <span class="mock-btn-name">Boxed Initials</span>
+        <span class="mock-btn-detail">JR in bordered box, slash nav right</span>
+      </button>
+      <button class="mock-btn" data-mock="f">
+        <span class="mock-btn-name">Serif + Mono</span>
+        <span class="mock-btn-detail">"Jeff Rose" serif left, mono slash nav right</span>
+      </button>
+      <button class="mock-btn" data-mock="g">
+        <span class="mock-btn-name">Name + Nav</span>
+        <span class="mock-btn-detail">Original — JR left, sans nav centered</span>
+      </button>
+      <button class="mock-btn" data-mock="h">
+        <span class="mock-btn-name">Name | Nav</span>
+        <span class="mock-btn-detail">JR + accent divider + left-aligned nav</span>
+      </button>
+    </div>
+  </div>
+</Base>
+
+<style is:global>
+  /* ===== Shared ===== */
+  .mock-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease;
+  }
+
+  /* ===== A: Name + Slash ===== */
+  .mock-a {
+    justify-content: space-between;
+  }
+
+  .nav-name-a {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .mock-nav-a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-link-a {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link-a:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-sep-a {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    opacity: 0.35;
+    user-select: none;
+  }
+
+  /* ===== B: Full Name Left ===== */
+  .mock-b {
+    justify-content: space-between;
+  }
+
+  .nav-name-b {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .mock-nav-b {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-right: 12px;
+  }
+
+  .nav-link-b {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link-b:hover {
+    color: var(--text-primary);
+  }
+
+  /* ===== C: Handle Left ===== */
+  .mock-c {
+    justify-content: space-between;
+  }
+
+  .nav-name-c {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+
+  .mock-nav-c {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-link-c {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link-c:hover {
+    color: var(--text-primary);
+  }
+
+  /* ===== D: Path Style ===== */
+  .mock-d {
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .mock-nav-d {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 12px;
+  }
+
+  .nav-prefix-d {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    opacity: 0.6;
+    user-select: none;
+  }
+
+  .nav-link-d {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link-d:hover {
+    color: var(--accent);
+  }
+
+  .nav-sep-d {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    opacity: 0.3;
+    user-select: none;
+  }
+
+  /* ===== E: Boxed Initials + Slash Right ===== */
+  .mock-e {
+    justify-content: space-between;
+  }
+
+  .nav-name-e {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    transition: border-color 0.2s ease;
+  }
+
+  .nav-name-e:hover {
+    border-color: var(--accent);
+  }
+
+  .mock-nav-e {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 12px;
+  }
+
+  .nav-link-e {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link-e:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-sep-e {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    opacity: 0.35;
+    user-select: none;
+  }
+
+  /* ===== F: Serif Name + Mono Slash Nav ===== */
+  .mock-f {
+    justify-content: space-between;
+  }
+
+  .nav-name-f {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .mock-nav-f {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 12px;
+  }
+
+  .nav-link-f {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-link-f:hover {
+    color: var(--accent);
+  }
+
+  .nav-sep-f {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    opacity: 0.3;
+    user-select: none;
+  }
+
+  /* ===== G: Name + Nav (original) ===== */
+  .mock-g {
+    justify-content: space-between;
+  }
+
+  .nav-name-g {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .mock-nav-g {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-link-g {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link-g:hover {
+    color: var(--text-primary);
+  }
+
+  /* ===== H: Name | Divider | Nav ===== */
+  .mock-h {
+    justify-content: flex-start;
+    gap: 0;
+  }
+
+  .nav-name-h {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-right: 16px;
+  }
+
+  .nav-divider-h {
+    width: 1px;
+    height: 18px;
+    background: var(--accent);
+    opacity: 0.35;
+    margin-right: 16px;
+  }
+
+  .mock-nav-h {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-link-h {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link-h:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-spacer-h {
+    flex: 1;
+  }
+
+  /* ===== Hero (inline for mock context) ===== */
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 0 80px;
+    position: relative;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 8vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-name::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.4;
+  }
+
+  .hero-handle {
+    font-family: 'Source Code Pro', monospace;
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-handle::before,
+  .hero-handle::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.4;
+  }
+
+  .hero-tagline {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .hero-role {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+  }
+
+  .hero-divider {
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.35;
+    margin: 32px 0;
+  }
+
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .contact-line {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+
+  .cl {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    width: 68px;
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  .contact-line a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+</style>
+
+<style>
+  /* ===== Switcher Panel ===== */
+  .mock-switcher {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: var(--bg-elevated);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+  }
+
+  .mock-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .mock-buttons {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mock-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .mock-btn-name {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .mock-btn-detail {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .mock-btn:hover {
+    background: var(--accent-subtle);
+    border-color: var(--card-border);
+  }
+
+  .mock-btn:hover .mock-btn-name {
+    color: var(--text-primary);
+  }
+
+  .mock-btn.active {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+  }
+
+  .mock-btn.active .mock-btn-name {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .mock-btn.active .mock-btn-detail {
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 900px) {
+    .mock-switcher {
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      transform: none;
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
+
+<script>
+  const mockButtons = document.querySelectorAll('.mock-btn');
+  const mockHeaders = document.querySelectorAll('.mock-header');
+
+  mockButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const mockId = btn.getAttribute('data-mock');
+
+      mockButtons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      mockHeaders.forEach((h) => {
+        (h as HTMLElement).style.display = 'none';
+      });
+
+      const target = document.getElementById(`mock-${mockId}`);
+      if (target) {
+        target.style.display = 'flex';
+      }
+    });
+  });
+</script>

@@ -1,0 +1,331 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+---
+
+<Base title="Typography Preview">
+  <SiteHeader />
+  <Hero />
+
+  <div class="typo-switcher" id="typo-switcher">
+    <div class="typo-label">Typography</div>
+    <div class="typo-buttons">
+      <button class="typo-btn active" data-theme-id="current">
+        <span class="typo-btn-name">Current</span>
+        <span class="typo-btn-detail">Instrument Serif + IBM Plex Mono + Inter</span>
+      </button>
+      <button class="typo-btn" data-theme-id="humanist">
+        <span class="typo-btn-name">Humanist</span>
+        <span class="typo-btn-detail">Libre Baskerville + Source Code Pro + Nunito Sans</span>
+      </button>
+      <button class="typo-btn" data-theme-id="warmblend">
+        <span class="typo-btn-name">Warm Blend</span>
+        <span class="typo-btn-detail">Instrument Serif + Source Code Pro + Nunito Sans</span>
+      </button>
+      <button class="typo-btn" data-theme-id="literary">
+        <span class="typo-btn-name">Literary</span>
+        <span class="typo-btn-detail">Lora + IBM Plex Mono + Inter</span>
+      </button>
+      <button class="typo-btn" data-theme-id="refined">
+        <span class="typo-btn-name">Refined</span>
+        <span class="typo-btn-detail">Spectral + IBM Plex Mono + Nunito Sans</span>
+      </button>
+      <button class="typo-btn" data-theme-id="craftsman">
+        <span class="typo-btn-name">Craftsman</span>
+        <span class="typo-btn-detail">Crimson Pro + Source Code Pro + Inter</span>
+      </button>
+      <button class="typo-btn" data-theme-id="heritage">
+        <span class="typo-btn-name">Heritage</span>
+        <span class="typo-btn-detail">DM Serif Display + IBM Plex Mono + Nunito Sans</span>
+      </button>
+      <button class="typo-btn" data-theme-id="understated">
+        <span class="typo-btn-name">Understated</span>
+        <span class="typo-btn-detail">Libre Baskerville + IBM Plex Mono + Inter</span>
+      </button>
+    </div>
+  </div>
+</Base>
+
+<!-- Load all typography variant fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Code+Pro:wght@400;500&family=Nunito+Sans:wght@400;500;600&family=Work+Sans:wght@500;600;700&family=Lora:wght@400;500;600;700&family=Spectral:wght@400;500;600;700&family=Crimson+Pro:wght@400;500;600;700&family=DM+Serif+Display&display=swap"
+  rel="stylesheet"
+/>
+
+<style is:global>
+  /* ===== Typography Themes ===== */
+
+  /* Humanist: Libre Baskerville + Source Code Pro + Nunito Sans + Work Sans */
+  [data-typo="humanist"] .hero-name {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(2.8rem, 7.5vw, 4.5rem);
+    letter-spacing: -0.01em;
+  }
+  [data-typo="humanist"] .hero-handle,
+  [data-typo="humanist"] .cl {
+    font-family: 'Source Code Pro', monospace;
+  }
+  [data-typo="humanist"] .hero-tagline,
+  [data-typo="humanist"] .contact-line {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+  }
+  [data-typo="humanist"] .hero-role {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* Warm Blend: Current heading + Humanist supporting cast */
+  [data-typo="warmblend"] .hero-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  [data-typo="warmblend"] .hero-handle,
+  [data-typo="warmblend"] .cl {
+    font-family: 'Source Code Pro', monospace;
+  }
+  [data-typo="warmblend"] .hero-tagline,
+  [data-typo="warmblend"] .contact-line {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+  }
+  [data-typo="warmblend"] .hero-role {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* Literary: Lora (warm transitional serif) + Current mono/body */
+  [data-typo="literary"] .hero-name {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(3rem, 8vw, 5rem);
+    letter-spacing: -0.02em;
+  }
+  [data-typo="literary"] .hero-handle,
+  [data-typo="literary"] .cl {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  [data-typo="literary"] .hero-tagline,
+  [data-typo="literary"] .contact-line {
+    font-family: 'Inter', sans-serif;
+  }
+  [data-typo="literary"] .hero-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* Refined: Spectral (elegant wedge serif) + Current mono + Humanist body */
+  [data-typo="refined"] .hero-name {
+    font-family: 'Spectral', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(3rem, 8vw, 5rem);
+    letter-spacing: -0.02em;
+  }
+  [data-typo="refined"] .hero-handle,
+  [data-typo="refined"] .cl {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  [data-typo="refined"] .hero-tagline,
+  [data-typo="refined"] .contact-line {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+  }
+  [data-typo="refined"] .hero-role {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* Craftsman: Crimson Pro (sharp old-style serif) + Humanist mono + Current body */
+  [data-typo="craftsman"] .hero-name {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(3.2rem, 8.5vw, 5.2rem);
+    letter-spacing: -0.01em;
+  }
+  [data-typo="craftsman"] .hero-handle,
+  [data-typo="craftsman"] .cl {
+    font-family: 'Source Code Pro', monospace;
+  }
+  [data-typo="craftsman"] .hero-tagline,
+  [data-typo="craftsman"] .contact-line {
+    font-family: 'Inter', sans-serif;
+  }
+  [data-typo="craftsman"] .hero-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* Heritage: DM Serif Display (bold modern serif) + Current mono + Humanist body */
+  [data-typo="heritage"] .hero-name {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 8vw, 5rem);
+    letter-spacing: -0.01em;
+  }
+  [data-typo="heritage"] .hero-handle,
+  [data-typo="heritage"] .cl {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  [data-typo="heritage"] .hero-tagline,
+  [data-typo="heritage"] .contact-line {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+  }
+  [data-typo="heritage"] .hero-role {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* Understated: Humanist heading + Current supporting cast */
+  [data-typo="understated"] .hero-name {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(2.8rem, 7.5vw, 4.5rem);
+    letter-spacing: -0.01em;
+  }
+  [data-typo="understated"] .hero-handle,
+  [data-typo="understated"] .cl {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  [data-typo="understated"] .hero-tagline,
+  [data-typo="understated"] .contact-line {
+    font-family: 'Inter', sans-serif;
+  }
+  [data-typo="understated"] .hero-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+</style>
+
+<style>
+  .typo-switcher {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: var(--bg-elevated);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+  }
+
+  .typo-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .typo-buttons {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .typo-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .typo-btn-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .typo-btn-detail {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .typo-btn:hover {
+    background: var(--accent-subtle);
+    border-color: var(--card-border);
+  }
+
+  .typo-btn:hover .typo-btn-name {
+    color: var(--text-primary);
+  }
+
+  .typo-btn.active {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+  }
+
+  .typo-btn.active .typo-btn-name {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .typo-btn.active .typo-btn-detail {
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 900px) {
+    .typo-switcher {
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      transform: none;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .typo-buttons {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll('.typo-btn');
+  const html = document.documentElement;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const themeId = btn.getAttribute('data-theme-id');
+      if (themeId === 'current') {
+        html.removeAttribute('data-typo');
+      } else {
+        html.setAttribute('data-typo', themeId);
+      }
+    });
+  });
+</script>

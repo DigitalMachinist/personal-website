@@ -1,0 +1,169 @@
+---
+import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Base title={`${article.data.title} — Jeff Rose`}>
+  <SiteHeader />
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">{article.data.title}</h1>
+      <time class="article-date" datetime={article.data.date.toISOString()}>
+        {formatDate(article.data.date)}
+      </time>
+      {article.data.tags.length > 0 && (
+        <div class="article-tags">
+          {article.data.tags.map((tag) => (
+            <span class="tag-pill">{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <article class="prose">
+      <Content />
+    </article>
+
+    <div class="back-link-wrap">
+      <a href="/articles" class="back-link">&larr; All articles</a>
+    </div>
+  </main>
+</Base>
+
+<style>
+  main {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 120px;
+  }
+
+  .article-date {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    display: block;
+    margin-top: 8px;
+  }
+
+  .article-tags {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  /* Prose styles for rendered markdown */
+  .prose {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-top: 48px;
+  }
+
+  .prose :global(h2) {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+
+  .prose :global(h3) {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 20px;
+  }
+
+  .prose :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+  }
+
+  .prose :global(a:hover) {
+    color: var(--accent-hover);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: 20px;
+    padding-left: 24px;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 8px;
+  }
+
+  .prose :global(code) {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.85em;
+    background: var(--accent-subtle);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  .prose :global(pre) {
+    background: var(--bg-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+    margin: 20px 0;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .back-link-wrap {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .back-link {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+</style>
