@@ -1,0 +1,247 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { resume } from '../data/resume';
+---
+
+<Base title="Resume — Jeff Rose">
+  <SiteHeader />
+  <main class="container">
+    <div class="resume-header">
+      <div class="resume-header-text">
+        <h1 class="resume-name">{resume.name}</h1>
+        <p class="resume-title">{resume.title}</p>
+      </div>
+      <a href="/resume.pdf" download class="pdf-button">
+        <svg class="pdf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+        </svg>
+        Download PDF
+      </a>
+    </div>
+
+    <p class="resume-summary">{resume.summary}</p>
+
+    <section class="resume-section">
+      <h2 class="section-heading">Experience</h2>
+      {resume.experience.map((exp) => (
+        <div class="experience-entry">
+          <div class="experience-header">
+            <h3 class="experience-company">{exp.company}</h3>
+            <span class="experience-period">{exp.period}</span>
+          </div>
+          <p class="experience-role">{exp.role}</p>
+          <p class="experience-desc">{exp.description}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="resume-section">
+      <h2 class="section-heading">Education</h2>
+      {resume.education.map((edu) => (
+        <div class="experience-entry">
+          <div class="experience-header">
+            <h3 class="experience-company">{edu.institution}</h3>
+            <span class="experience-period">{edu.period}</span>
+          </div>
+          <p class="experience-role">{edu.degree}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="resume-section">
+      <h2 class="section-heading">Skills</h2>
+      <div class="skills-grid">
+        {resume.skills.map((group) => (
+          <div class="skill-group">
+            <h3 class="skill-category">{group.category}</h3>
+            <div class="skill-pills">
+              {group.items.map((item) => (
+                <span class="tag-pill">{item}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  main {
+    position: relative;
+    z-index: 1;
+    padding-top: 80px;
+    padding-bottom: 120px;
+  }
+
+  /* Header */
+  .resume-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+    padding-top: 40px;
+  }
+
+  .resume-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 2rem;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .resume-title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  .pdf-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: var(--accent-subtle);
+    border: 1px solid var(--card-border);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .pdf-button:hover {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+  }
+
+  .pdf-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Summary */
+  .resume-summary {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 40px;
+  }
+
+  /* Sections */
+  .resume-section {
+    margin-bottom: 40px;
+  }
+
+  .section-heading {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 24px;
+  }
+
+  /* Experience entries */
+  .experience-entry {
+    margin-bottom: 28px;
+  }
+
+  .experience-entry:last-child {
+    margin-bottom: 0;
+  }
+
+  .experience-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 2px;
+  }
+
+  .experience-company {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+
+  .experience-period {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .experience-role {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .experience-desc {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .skill-category {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .skill-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .resume-header {
+      flex-direction: column;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .experience-header {
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
+
+  @media print {
+    main {
+      padding-top: 0;
+    }
+
+    .pdf-button {
+      display: none;
+    }
+  }
+</style>

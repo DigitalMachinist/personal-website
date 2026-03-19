@@ -1,0 +1,165 @@
+---
+import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const featured = allArticles[0];
+const rest = allArticles.slice(1);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<Base title="Articles — Jeff Rose">
+  <SiteHeader />
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">Articles</h1>
+    </div>
+
+    {featured && (
+      <article class="featured">
+        <a href={`/articles/${featured.id}`} class="featured-link">
+          <h2 class="featured-title">{featured.data.title}</h2>
+        </a>
+        <time class="featured-date" datetime={featured.data.date.toISOString()}>
+          {formatDate(featured.data.date)}
+        </time>
+        <p class="featured-excerpt">{featured.data.excerpt}</p>
+        {featured.data.tags.length > 0 && (
+          <div class="featured-tags">
+            {featured.data.tags.map((tag) => (
+              <span class="tag-pill">{tag}</span>
+            ))}
+          </div>
+        )}
+      </article>
+    )}
+
+    {rest.length > 0 && (
+      <>
+        <div class="gradient-divider" style="margin: 32px 0 24px;" />
+        <ul class="article-list">
+          {rest.map((article) => (
+            <li class="article-row">
+              <time class="article-date" datetime={article.data.date.toISOString()}>
+                {formatDate(article.data.date)}
+              </time>
+              <a href={`/articles/${article.id}`} class="article-title-link">
+                {article.data.title}
+              </a>
+              {article.data.tags[0] && (
+                <span class="tag-pill">{article.data.tags[0]}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+  </main>
+</Base>
+
+<style>
+  main {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 120px;
+  }
+
+  /* Featured article */
+  .featured {
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+    margin-bottom: 0;
+  }
+
+  .featured-link {
+    text-decoration: none;
+  }
+
+  .featured-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 6px;
+    transition: color 0.2s ease;
+  }
+
+  .featured-link:hover .featured-title {
+    color: var(--accent);
+  }
+
+  .featured-date {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .featured-excerpt {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .featured-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  /* Compact list */
+  .article-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .article-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .article-date {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    width: 100px;
+    flex-shrink: 0;
+  }
+
+  .article-title-link {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .article-title-link:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .article-row {
+      flex-wrap: wrap;
+      gap: 4px 12px;
+    }
+
+    .article-date {
+      width: auto;
+    }
+  }
+</style>

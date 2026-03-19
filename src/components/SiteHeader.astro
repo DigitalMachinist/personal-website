@@ -3,14 +3,79 @@ import ThemeToggle from './ThemeToggle.astro';
 ---
 
 <header class="site-header" role="banner">
+  <a href="/" class="site-header-name">JR</a>
+  <nav class="site-header-nav">
+    <a href="/articles" class="site-header-link">Articles</a>
+    <span class="site-header-sep" aria-hidden="true">/</span>
+    <a href="/game-jams" class="site-header-link">Game Jams</a>
+    <span class="site-header-sep" aria-hidden="true">/</span>
+    <a href="/projects" class="site-header-link">Projects</a>
+    <span class="site-header-sep" aria-hidden="true">/</span>
+    <a href="/resume" class="site-header-link">Resume</a>
+  </nav>
   <ThemeToggle />
 </header>
 
 <style>
   .site-header {
     position: fixed;
-    top: 24px;
-    right: 24px;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-header-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .site-header-name:hover {
+    color: var(--accent);
+  }
+
+  .site-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .site-header-link {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .site-header-link:hover {
+    color: var(--text-primary);
+  }
+
+  .site-header-link:focus-visible {
+    color: var(--accent);
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .site-header-sep {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    opacity: 0.35;
+    user-select: none;
   }
 </style>

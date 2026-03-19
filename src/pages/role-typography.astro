@@ -1,0 +1,382 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+---
+
+<Base title="Role Typography Preview">
+  <SiteHeader />
+
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-content container">
+      <h1 class="hero-name">Jeff Rose</h1>
+      <div class="hero-handle">Digital Machinist</div>
+      <p class="hero-tagline">Building systems that work for everyone</p>
+      <p class="hero-role" id="role-text">Staff Software Engineer · Laravel Specialist | Regulated Financial Systems · Game Development</p>
+      <div class="hero-divider" aria-hidden="true"></div>
+      <div class="contact-block">
+        <div class="contact-line"><span class="cl">EMAIL</span><a href="#">jrose0@gmail.com</a></div>
+        <div class="contact-line"><span class="cl">GITHUB</span><a href="#">github.com/DigitalMachinist</a></div>
+        <div class="contact-line"><span class="cl">LINKEDIN</span><a href="#">linkedin.com/in/jrose0</a></div>
+        <div class="contact-line"><span class="cl">HOME</span><span>Toronto, ON</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Switcher -->
+  <div class="mock-switcher">
+    <div class="mock-label">Role Typography</div>
+    <div class="mock-buttons">
+      <button class="mock-btn active" data-role="current">
+        <span class="mock-btn-name">Current</span>
+        <span class="mock-btn-detail">Work Sans 600, 0.9rem, dim</span>
+      </button>
+      <button class="mock-btn" data-role="mono">
+        <span class="mock-btn-name">Monospace</span>
+        <span class="mock-btn-detail">Source Code Pro 400, small caps feel</span>
+      </button>
+      <button class="mock-btn" data-role="light-sans">
+        <span class="mock-btn-name">Light Sans</span>
+        <span class="mock-btn-detail">Nunito Sans 400, wider tracking</span>
+      </button>
+      <button class="mock-btn" data-role="uppercase-mono">
+        <span class="mock-btn-name">Uppercase Mono</span>
+        <span class="mock-btn-detail">Source Code Pro 400, uppercase, tight</span>
+      </button>
+      <button class="mock-btn" data-role="serif">
+        <span class="mock-btn-name">Serif</span>
+        <span class="mock-btn-detail">Instrument Serif italic, secondary color</span>
+      </button>
+      <button class="mock-btn" data-role="bold-work">
+        <span class="mock-btn-name">Bold Work</span>
+        <span class="mock-btn-detail">Work Sans 700, slightly larger</span>
+      </button>
+      <button class="mock-btn" data-role="thin-wide">
+        <span class="mock-btn-name">Thin Wide</span>
+        <span class="mock-btn-detail">Work Sans 400, 0.8rem, wide tracking</span>
+      </button>
+      <button class="mock-btn" data-role="accent-mono">
+        <span class="mock-btn-name">Accent Mono</span>
+        <span class="mock-btn-detail">Source Code Pro 400, accent color</span>
+      </button>
+    </div>
+  </div>
+</Base>
+
+<!-- Load italic variant for serif option -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap"
+  rel="stylesheet"
+/>
+
+<style is:global>
+  /* ===== Role Typography Variants ===== */
+
+  /* Monospace: Source Code Pro regular */
+  [data-role-typo="mono"] .hero-role {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    color: var(--text-dim);
+  }
+
+  /* Light Sans: Nunito Sans light with wide tracking */
+  [data-role-typo="light-sans"] .hero-role {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+  }
+
+  /* Uppercase Mono */
+  [data-role-typo="uppercase-mono"] .hero-role {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* Serif italic */
+  [data-role-typo="serif"] .hero-role {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    color: var(--text-secondary);
+  }
+
+  /* Bold Work Sans */
+  [data-role-typo="bold-work"] .hero-role {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: var(--text-dim);
+  }
+
+  /* Thin Wide */
+  [data-role-typo="thin-wide"] .hero-role {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+  }
+
+  /* Accent Mono */
+  [data-role-typo="accent-mono"] .hero-role {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    opacity: 0.6;
+  }
+</style>
+
+<style>
+  /* ===== Hero (inline for mock) ===== */
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 0 80px;
+    position: relative;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 8vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-name::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.4;
+  }
+
+  .hero-handle {
+    font-family: 'Source Code Pro', monospace;
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-handle::before,
+  .hero-handle::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.4;
+  }
+
+  .hero-tagline {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .hero-role {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+    transition: all 0.2s ease;
+  }
+
+  .hero-divider {
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.35;
+    margin: 32px 0;
+  }
+
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .contact-line {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+
+  .cl {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    width: 68px;
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  .contact-line a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  /* ===== Switcher ===== */
+  .mock-switcher {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: var(--bg-elevated);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+  }
+
+  .mock-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .mock-buttons {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mock-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .mock-btn-name {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .mock-btn-detail {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .mock-btn:hover {
+    background: var(--accent-subtle);
+    border-color: var(--card-border);
+  }
+
+  .mock-btn:hover .mock-btn-name {
+    color: var(--text-primary);
+  }
+
+  .mock-btn.active {
+    background: var(--accent-subtle);
+    border-color: var(--accent);
+  }
+
+  .mock-btn.active .mock-btn-name {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .mock-btn.active .mock-btn-detail {
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 900px) {
+    .mock-switcher {
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      transform: none;
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll('.mock-btn');
+  const html = document.documentElement;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const roleId = btn.getAttribute('data-role');
+      if (roleId === 'current') {
+        html.removeAttribute('data-role-typo');
+      } else {
+        html.setAttribute('data-role-typo', roleId!);
+      }
+    });
+  });
+</script>

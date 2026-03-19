@@ -49,7 +49,7 @@
 
 /* ===== Typography ===== */
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-weight: 400;
   color: var(--text-primary);
   background: var(--bg-deep);
@@ -93,4 +93,60 @@ body::after {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+/* ===== Page Layout ===== */
+.page-header {
+  padding: 120px 0 40px;
+  text-align: center;
+}
+
+.page-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ===== Shared Components ===== */
+.tag-pill {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-subtle);
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.external-link-icon {
+  width: 14px;
+  height: 14px;
+  stroke: var(--text-dim);
+  stroke-width: 2;
+  fill: none;
+  transition: stroke 0.2s ease;
+  flex-shrink: 0;
+}
+
+a:hover .external-link-icon {
+  stroke: var(--accent);
+}
+
+.gradient-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.25;
 }

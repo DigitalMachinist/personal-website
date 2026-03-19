@@ -1,0 +1,150 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { getCollection } from 'astro:content';
+
+const jams = (await getCollection('game-jams'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base title="Game Jams — Jeff Rose">
+  <SiteHeader />
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">Game Jams</h1>
+    </div>
+
+    <div class="card-list">
+      {jams.map((jam) => (
+        <a href={jam.data.url} target="_blank" rel="noopener noreferrer" class="card">
+          <div class="card-thumb" style={jam.data.thumbnail ? `background-image: url(${jam.data.thumbnail})` : ''}>
+            {!jam.data.thumbnail && <span class="card-thumb-fallback">{jam.data.name.charAt(0)}</span>}
+          </div>
+          <div class="card-body">
+            <h2 class="card-name">{jam.data.name}</h2>
+            <span class="card-context">{jam.data.jam}</span>
+            <p class="card-desc">{jam.body}</p>
+            <div class="card-footer">
+              {jam.data.tech.length > 0 && (
+                <div class="card-tech">
+                  {jam.data.tech.map((t) => (
+                    <span class="tag-pill">{t}</span>
+                  ))}
+                </div>
+              )}
+              <svg class="external-link-icon" viewBox="0 0 24 24" aria-label="External link">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Base>
+
+<style>
+  main {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 120px;
+  }
+
+  .card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    display: flex;
+    background: var(--bg-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+
+  .card-thumb {
+    width: 180px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--bg-elevated), var(--bg-surface));
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-thumb-fallback {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 2.5rem;
+    color: var(--text-dim);
+    opacity: 0.3;
+  }
+
+  .card-body {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .card-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .card-context {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+
+  .card-desc {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .card-tech {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .card {
+      flex-direction: column;
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 160px;
+    }
+  }
+</style>
