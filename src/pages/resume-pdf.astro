@@ -1,0 +1,327 @@
+---
+import Base from '../layouts/Base.astro';
+import { resume } from '../data/resume';
+---
+
+<Base title="Resume — Jeff Rose">
+  <main class="container">
+
+    <div class="resume-header">
+      <h1 class="resume-name">{resume.name}</h1>
+      <p class="resume-title">{resume.title}</p>
+    </div>
+
+    <div class="header-divider"></div>
+
+    <div class="contact-grid">
+      <div class="contact-row">
+        <span class="contact-label">Email</span>
+        <a href={`mailto:${resume.contact.email}`} class="contact-item contact-link">{resume.contact.email}</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Web</span>
+        <a href="https://digitalmachinist.ca" class="contact-item contact-link">digitalmachinist.ca</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Phone</span>
+        <span class="contact-item">{resume.contact.phone}</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">GitHub</span>
+        <a href={`https://${resume.contact.github}`} class="contact-item contact-link">{resume.contact.github}</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Location</span>
+        <span class="contact-item">{resume.contact.location}</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">LinkedIn</span>
+        <a href={`https://${resume.contact.linkedin}`} class="contact-item contact-link">{resume.contact.linkedin}</a>
+      </div>
+    </div>
+
+    <p class="resume-summary">{resume.summary}</p>
+
+    <section class="resume-section">
+      <h2 class="section-heading">Skills</h2>
+      <div class="skills-list">
+        {resume.skills.map((group) => (
+          <p class="skill-line">
+            <strong class="skill-category">{group.category}:</strong>{' '}
+            {group.items.join(', ')}
+          </p>
+        ))}
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2 class="section-heading">Experience</h2>
+      {resume.experience.map((exp) => (
+        <div class="experience-entry">
+          <div class="experience-header">
+            <h3 class="experience-company">{exp.company}</h3>
+            {exp.roles.length === 1 && (
+              <span class="experience-period">{exp.roles[0].period}</span>
+            )}
+          </div>
+          {exp.subtitle && (
+            <p class="experience-subtitle">{exp.subtitle}</p>
+          )}
+          {exp.roles.length === 1 ? (
+            <div>
+              <p class="experience-role">{exp.roles[0].title}</p>
+              <ul class="bullets">
+                {exp.roles[0].bullets.map((b: string) => <li>{b}</li>)}
+              </ul>
+            </div>
+          ) : (
+            <div class="sub-roles">
+              {exp.roles.map((role) => (
+                <div class="sub-role">
+                  <div class="sub-role-header">
+                    <p class="experience-role">{role.title}</p>
+                    <span class="experience-period">{role.period}</span>
+                  </div>
+                  <ul class="bullets">
+                    {role.bullets.map((b: string) => <li>{b}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </section>
+
+    <section class="resume-section">
+      <h2 class="section-heading">Education</h2>
+      {resume.education.map((edu) => (
+        <div class="experience-entry">
+          <h3 class="experience-company">{edu.institution}</h3>
+          <p class="experience-role">{edu.degree}</p>
+        </div>
+      ))}
+    </section>
+
+  </main>
+</Base>
+
+<style is:global>
+  body {
+    background: #FFFFFF !important;
+  }
+
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  ul.bullets li {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  ul.bullets li::before {
+    content: '‐';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    opacity: 0.6;
+  }
+</style>
+
+<style>
+  main {
+    position: relative;
+    z-index: 1;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    --accent: #8B5523;
+    --accent-hover: #A0622D;
+    --accent-subtle: rgba(139, 85, 35, 0.08);
+    --accent-glow: rgba(139, 85, 35, 0.18);
+    --card-border: rgba(139, 85, 35, 0.22);
+    --divider: rgba(139, 85, 35, 0.28);
+  }
+
+  /* Header */
+  .resume-header {
+    margin-bottom: 6px;
+    padding-top: 0;
+  }
+
+  .resume-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .resume-title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Divider */
+  .header-divider {
+    height: 1px;
+    background: var(--card-border);
+    margin-bottom: 8px;
+  }
+
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px 24px;
+    margin-bottom: 12px;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .contact-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.58rem;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 52px;
+  }
+
+  .contact-item {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+  }
+
+  .contact-link {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* Summary */
+  .resume-summary {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  /* Skills */
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .skill-line {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+
+  .skill-category {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Sections */
+  .resume-section {
+    margin-bottom: 14px;
+  }
+
+  .section-heading {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 10px;
+  }
+
+  /* Experience entries */
+  .experience-entry {
+    margin-bottom: 14px;
+  }
+
+  .experience-entry:last-child {
+    margin-bottom: 0;
+  }
+
+  .experience-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 1px;
+  }
+
+  .experience-company {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+  }
+
+  .experience-subtitle {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .experience-period {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  .experience-role {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+
+  /* Sub-roles */
+  .sub-roles {
+    border-left: 3px solid var(--accent);
+    border-image: linear-gradient(to bottom, var(--accent), var(--card-border)) 1;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sub-role-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+</style>
