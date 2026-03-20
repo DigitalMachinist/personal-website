@@ -3,12 +3,14 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
+    "dev": "npx astro dev",
+    "build": "npm run build:content && npm run build:resume",
+    "build:content": "npx astro build",
+    "build:resume": "node scripts/generate-pdf.mjs",
+    "preview": "npx astro preview",
+    "astro": "npx astro",
     "generate:pdf": "node scripts/generate-pdf.mjs",
-    "deploy": "npm run generate:pdf && astro build && npx wrangler pages deploy"
+    "deploy": "npm run build && npx wrangler pages deploy"
   },
   "dependencies": {
     "astro": "^5.17.1"
