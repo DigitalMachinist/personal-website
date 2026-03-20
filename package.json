@@ -7,12 +7,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && npx wrangler pages deploy"
+    "generate:pdf": "node scripts/generate-pdf.mjs",
+    "deploy": "npm run generate:pdf && astro build && npx wrangler pages deploy"
   },
   "dependencies": {
     "astro": "^5.17.1"
   },
   "devDependencies": {
+    "playwright": "^1.58.2",
     "wrangler": "^4.75.0"
   }
 }

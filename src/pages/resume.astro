@@ -7,6 +7,7 @@ import { resume } from '../data/resume';
 <Base title="Resume — Jeff Rose">
   <SiteHeader />
   <main class="container">
+
     <div class="resume-header">
       <div class="resume-header-text">
         <h1 class="resume-name">{resume.name}</h1>
@@ -20,6 +21,18 @@ import { resume } from '../data/resume';
       </a>
     </div>
 
+    <div class="contact-bar">
+      <span class="contact-item">{resume.contact.location}</span>
+      <span class="contact-sep">&middot;</span>
+      <span class="contact-item">{resume.contact.phone}</span>
+      <span class="contact-sep">&middot;</span>
+      <a href={`mailto:${resume.contact.email}`} class="contact-item contact-link">{resume.contact.email}</a>
+      <span class="contact-sep">&middot;</span>
+      <a href={`https://${resume.contact.linkedin}`} class="contact-item contact-link" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="contact-sep">&middot;</span>
+      <a href={`https://${resume.contact.github}`} class="contact-item contact-link" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
     <p class="resume-summary">{resume.summary}</p>
 
     <section class="resume-section">
@@ -28,10 +41,35 @@ import { resume } from '../data/resume';
         <div class="experience-entry">
           <div class="experience-header">
             <h3 class="experience-company">{exp.company}</h3>
-            <span class="experience-period">{exp.period}</span>
+            {exp.roles.length === 1 && (
+              <span class="experience-period">{exp.roles[0].period}</span>
+            )}
           </div>
-          <p class="experience-role">{exp.role}</p>
-          <p class="experience-desc">{exp.description}</p>
+          {exp.subtitle && (
+            <p class="experience-subtitle">{exp.subtitle}</p>
+          )}
+          {exp.roles.length === 1 ? (
+            <div>
+              <p class="experience-role">{exp.roles[0].title}</p>
+              <ul class="bullets">
+                {exp.roles[0].bullets.map((b: string) => <li>{b}</li>)}
+              </ul>
+            </div>
+          ) : (
+            <div class="sub-roles">
+              {exp.roles.map((role) => (
+                <div class="sub-role">
+                  <div class="sub-role-header">
+                    <p class="experience-role">{role.title}</p>
+                    <span class="experience-period">{role.period}</span>
+                  </div>
+                  <ul class="bullets">
+                    {role.bullets.map((b: string) => <li>{b}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </section>
@@ -40,10 +78,7 @@ import { resume } from '../data/resume';
       <h2 class="section-heading">Education</h2>
       {resume.education.map((edu) => (
         <div class="experience-entry">
-          <div class="experience-header">
-            <h3 class="experience-company">{edu.institution}</h3>
-            <span class="experience-period">{edu.period}</span>
-          </div>
+          <h3 class="experience-company">{edu.institution}</h3>
           <p class="experience-role">{edu.degree}</p>
         </div>
       ))}
@@ -64,8 +99,36 @@ import { resume } from '../data/resume';
         ))}
       </div>
     </section>
+
   </main>
 </Base>
+
+<style is:global>
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  ul.bullets li {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  ul.bullets li::before {
+    content: '‐';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    opacity: 0.6;
+  }
+</style>
 
 <style>
   main {
@@ -73,6 +136,22 @@ import { resume } from '../data/resume';
     z-index: 1;
     padding-top: 80px;
     padding-bottom: 120px;
+
+    --accent: #D49A3E;
+    --accent-hover: #E0A844;
+    --accent-subtle: rgba(212, 154, 62, 0.1);
+    --accent-glow: rgba(212, 154, 62, 0.25);
+    --card-border: rgba(212, 154, 62, 0.18);
+    --divider: rgba(212, 154, 62, 0.22);
+  }
+
+  :global([data-theme="light"]) main {
+    --accent: #8B5523;
+    --accent-hover: #A0622D;
+    --accent-subtle: rgba(139, 85, 35, 0.08);
+    --accent-glow: rgba(139, 85, 35, 0.18);
+    --card-border: rgba(139, 85, 35, 0.22);
+    --divider: rgba(139, 85, 35, 0.28);
   }
 
   /* Header */
@@ -81,7 +160,7 @@ import { resume } from '../data/resume';
     align-items: flex-start;
     justify-content: space-between;
     gap: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     padding-top: 40px;
   }
 
@@ -127,6 +206,37 @@ import { resume } from '../data/resume';
     height: 16px;
   }
 
+  /* Contact bar */
+  .contact-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .contact-item {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+
+  .contact-link {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .contact-link:hover {
+    color: var(--accent-hover);
+  }
+
+  .contact-sep {
+    font-size: 0.6rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+  }
+
   /* Summary */
   .resume-summary {
     font-family: 'Nunito Sans', sans-serif;
@@ -155,7 +265,7 @@ import { resume } from '../data/resume';
 
   /* Experience entries */
   .experience-entry {
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
   .experience-entry:last-child {
@@ -173,42 +283,70 @@ import { resume } from '../data/resume';
   .experience-company {
     font-family: 'Instrument Serif', Georgia, serif;
     font-weight: 400;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--text-primary);
+  }
+
+  .experience-subtitle {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 14px;
+    line-height: 1.5;
   }
 
   .experience-period {
     font-family: 'Source Code Pro', monospace;
     font-size: 0.75rem;
-    color: var(--text-dim);
+    color: var(--text-secondary);
     white-space: nowrap;
   }
 
   .experience-role {
     font-family: 'Nunito Sans', sans-serif;
     font-size: 0.85rem;
+    font-weight: 600;
     color: var(--accent);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
-  .experience-desc {
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
+  /* Sub-roles */
+  .sub-roles {
+    border-left: 4px solid var(--accent);
+    border-image: linear-gradient(to bottom, var(--accent), var(--card-border)) 1;
+    padding-left: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sub-role-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
   }
 
   /* Skills */
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 16px 24px;
+  }
+
+  .skill-group {
+    padding-top: 16px;
+  }
+
+  .skill-group:nth-child(-n+2) {
+    padding-top: 0;
   }
 
   .skill-category {
     font-family: 'Source Code Pro', monospace;
     font-size: 0.72rem;
-    color: var(--text-dim);
+    color: var(--text-secondary);
     letter-spacing: 0.05em;
     text-transform: uppercase;
     margin-bottom: 8px;
@@ -220,6 +358,7 @@ import { resume } from '../data/resume';
     flex-wrap: wrap;
   }
 
+  /* Responsive */
   @media (max-width: 640px) {
     .resume-header {
       flex-direction: column;
@@ -229,15 +368,34 @@ import { resume } from '../data/resume';
       grid-template-columns: 1fr;
     }
 
-    .experience-header {
+    .skill-group:nth-child(-n+2) {
+      padding-top: inherit;
+    }
+
+    .skill-group:first-child {
+      padding-top: 0;
+    }
+
+    .experience-header,
+    .sub-role-header {
       flex-direction: column;
       gap: 2px;
+    }
+
+    .contact-bar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .contact-sep {
+      display: none;
     }
   }
 
   @media print {
     main {
       padding-top: 0;
+      padding-bottom: 0;
     }
 
     .pdf-button {
