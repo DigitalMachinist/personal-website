@@ -4,13 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "npx astro dev",
-    "build": "npm run build:content && npm run build:resume",
+    "build": "npm run build:content",
     "build:content": "npx astro build",
-    "build:resume": "node scripts/generate-pdf.mjs",
+    "resume": "node scripts/resume-pdf.mjs",
     "preview": "npx astro preview",
     "astro": "npx astro",
-    "generate:pdf": "node scripts/generate-pdf.mjs",
-    "deploy": "npm run build && npx wrangler pages deploy"
+    "deploy": "npm run resume && npm run build && npx wrangler pages deploy"
   },
   "dependencies": {
     "astro": "^5.17.1"
