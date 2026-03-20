@@ -1,10 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 const jams = (await getCollection('game-jams'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const rendered = await Promise.all(
+  jams.map(async (jam) => {
+    const { Content } = await render(jam);
+    return { jam, Content };
+  })
+);
 ---
 
 <Base title="Game Jams — Jeff Rose">
@@ -15,15 +22,15 @@ const jams = (await getCollection('game-jams'))
     </div>
 
     <div class="card-list">
-      {jams.map((jam) => (
-        <a href={jam.data.url} target="_blank" rel="noopener noreferrer" class="card">
+      {rendered.map(({ jam, Content }) => (
+        <div class="card">
           <div class="card-thumb" style={jam.data.thumbnail ? `background-image: url(${jam.data.thumbnail})` : ''}>
             {!jam.data.thumbnail && <span class="card-thumb-fallback">{jam.data.name.charAt(0)}</span>}
           </div>
           <div class="card-body">
             <h2 class="card-name">{jam.data.name}</h2>
             <span class="card-context">{jam.data.jam}</span>
-            <p class="card-desc">{jam.body}</p>
+            <div class="card-desc"><Content /></div>
             <div class="card-footer">
               {jam.data.tech.length > 0 && (
                 <div class="card-tech">
@@ -32,12 +39,12 @@ const jams = (await getCollection('game-jams'))
                   ))}
                 </div>
               )}
-              <svg class="external-link-icon" viewBox="0 0 24 24" aria-label="External link">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
+              <div class="card-links">
+                <a href={jam.data.url} target="_blank" rel="noopener noreferrer" class="link-pill link-pill-accent">Visit ↗</a>
+              </div>
             </div>
           </div>
-        </a>
+        </div>
       ))}
     </div>
   </main>
@@ -62,14 +69,6 @@ const jams = (await getCollection('game-jams'))
     border: 1px solid var(--card-border);
     border-radius: 8px;
     overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 20px var(--accent-glow);
   }
 
   .card-thumb {
@@ -128,6 +127,25 @@ const jams = (await getCollection('game-jams'))
     flex: 1;
   }
 
+  .card-desc :global(p) {
+    margin-bottom: 0.5em;
+  }
+
+  .card-desc :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .card-desc :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .card-desc :global(strong),
+  .card-desc :global(em) {
+    color: inherit;
+  }
+
   .card-footer {
     display: flex;
     align-items: center;
@@ -139,6 +157,39 @@ const jams = (await getCollection('game-jams'))
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .link-pill {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    background: var(--accent-subtle);
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .link-pill:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  .link-pill-accent {
+    color: var(--accent);
+    background: var(--accent-subtle);
+    border-color: var(--divider);
+  }
+
+  .link-pill-accent:hover {
+    border-color: var(--accent);
   }
 
   @media (max-width: 640px) {
