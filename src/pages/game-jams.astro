@@ -73,14 +73,18 @@ const jams = (await getCollection('game-jams'))
   }
 
   .card-thumb {
-    width: 180px;
+    width: 300px;
     flex-shrink: 0;
     background: linear-gradient(135deg, var(--bg-elevated), var(--bg-surface));
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+  }
+
+  .card-thumb-img {
+    width: 100%;
+    display: block;
   }
 
   .card-thumb-fallback {

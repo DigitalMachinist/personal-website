@@ -18,9 +18,11 @@ const gameJams = defineCollection({
     name: z.string(),
     jam: z.string(),
     url: z.string(),
+    github: z.string().optional(),
     thumbnail: z.string().optional(),
     tech: z.array(z.string()).default([]),
     date: z.coerce.date(),
+    sortOrder: z.number().optional(),
   }),
 });
 
