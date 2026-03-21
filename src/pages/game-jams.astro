@@ -4,7 +4,12 @@ import SiteHeader from '../components/SiteHeader.astro';
 import { getCollection, render } from 'astro:content';
 
 const jams = (await getCollection('game-jams'))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  .sort((a, b) => {
+    const aOrder = a.data.sortOrder ?? 999;
+    const bOrder = b.data.sortOrder ?? 999;
+    if (aOrder !== bOrder) return aOrder - bOrder;
+    return b.data.date.getTime() - a.data.date.getTime();
+  });
 
 const rendered = await Promise.all(
   jams.map(async (jam) => {
@@ -24,8 +29,10 @@ const rendered = await Promise.all(
     <div class="card-list">
       {rendered.map(({ jam, Content }) => (
         <div class="card">
-          <div class="card-thumb" style={jam.data.thumbnail ? `background-image: url(${jam.data.thumbnail})` : ''}>
-            {!jam.data.thumbnail && <span class="card-thumb-fallback">{jam.data.name.charAt(0)}</span>}
+          <div class="card-thumb">
+            {jam.data.thumbnail
+              ? <img src={jam.data.thumbnail} alt={jam.data.name} class="card-thumb-img" />
+              : <span class="card-thumb-fallback">{jam.data.name.charAt(0)}</span>}
           </div>
           <div class="card-body">
             <h2 class="card-name">{jam.data.name}</h2>
@@ -40,6 +47,9 @@ const rendered = await Promise.all(
                 </div>
               )}
               <div class="card-links">
+                {jam.data.github && (
+                  <a href={jam.data.github} target="_blank" rel="noopener noreferrer" class="link-pill">GitHub</a>
+                )}
                 <a href={jam.data.url} target="_blank" rel="noopener noreferrer" class="link-pill link-pill-accent">Visit ↗</a>
               </div>
             </div>

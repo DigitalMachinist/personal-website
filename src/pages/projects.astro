@@ -32,8 +32,10 @@ const rendered = await Promise.all(
     <div class="card-list">
       {rendered.map(({ project, Content }) => (
         <div class="card">
-          <div class="card-thumb" style={project.data.thumbnail ? `background-image: url(${project.data.thumbnail})` : ''}>
-            {!project.data.thumbnail && <span class="card-thumb-fallback">{project.data.name.charAt(0)}</span>}
+          <div class="card-thumb">
+            {project.data.thumbnail
+              ? <img src={project.data.thumbnail} alt={project.data.name} class="card-thumb-img" />
+              : <span class="card-thumb-fallback">{project.data.name.charAt(0)}</span>}
           </div>
           <div class="card-body">
             <h2 class="card-name">{project.data.name}</h2>
