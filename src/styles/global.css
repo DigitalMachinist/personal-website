@@ -134,19 +134,6 @@ body::after {
   white-space: nowrap;
 }
 
-.external-link-icon {
-  width: 14px;
-  height: 14px;
-  stroke: var(--text-dim);
-  stroke-width: 2;
-  fill: none;
-  transition: stroke 0.2s ease;
-  flex-shrink: 0;
-}
-
-a:hover .external-link-icon {
-  stroke: var(--accent);
-}
 
 .gradient-divider {
   width: 100%;

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 const projects = (await getCollection('projects'))
   .sort((a, b) => {
@@ -13,6 +13,13 @@ const projects = (await getCollection('projects'))
     if (aOrder !== bOrder) return aOrder - bOrder;
     return a.data.name.localeCompare(b.data.name);
   });
+
+const rendered = await Promise.all(
+  projects.map(async (project) => {
+    const { Content } = await render(project);
+    return { project, Content };
+  })
+);
 ---
 
 <Base title="Projects — Jeff Rose">
@@ -23,10 +30,12 @@ const projects = (await getCollection('projects'))
     </div>
 
     <div class="card-list">
-      {projects.map((project) => (
-        <a href={project.data.url} target="_blank" rel="noopener noreferrer" class="card">
-          <div class="card-thumb" style={project.data.thumbnail ? `background-image: url(${project.data.thumbnail})` : ''}>
-            {!project.data.thumbnail && <span class="card-thumb-fallback">{project.data.name.charAt(0)}</span>}
+      {rendered.map(({ project, Content }) => (
+        <div class="card">
+          <div class="card-thumb">
+            {project.data.thumbnail
+              ? <img src={project.data.thumbnail} alt={project.data.name} class="card-thumb-img" />
+              : <span class="card-thumb-fallback">{project.data.name.charAt(0)}</span>}
           </div>
           <div class="card-body">
             <h2 class="card-name">{project.data.name}</h2>
@@ -34,7 +43,7 @@ const projects = (await getCollection('projects'))
               <span class="status-dot" />
               {project.data.status}
             </span>
-            <p class="card-desc">{project.body}</p>
+            <div class="card-desc"><Content /></div>
             <div class="card-footer">
               {project.data.tech.length > 0 && (
                 <div class="card-tech">
@@ -45,17 +54,13 @@ const projects = (await getCollection('projects'))
               )}
               <div class="card-links">
                 {project.data.repo && (
-                  <svg class="external-link-icon" viewBox="0 0 24 24" aria-label="GitHub repository">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                  </svg>
+                  <a href={project.data.repo} target="_blank" rel="noopener noreferrer" class="link-pill">GitHub</a>
                 )}
-                <svg class="external-link-icon" viewBox="0 0 24 24" aria-label="External link">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
+                <a href={project.data.url} target="_blank" rel="noopener noreferrer" class="link-pill link-pill-accent">Visit ↗</a>
               </div>
             </div>
           </div>
-        </a>
+        </div>
       ))}
     </div>
   </main>
@@ -80,14 +85,6 @@ const projects = (await getCollection('projects'))
     border: 1px solid var(--card-border);
     border-radius: 8px;
     overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 20px var(--accent-glow);
   }
 
   .card-thumb {
@@ -172,6 +169,25 @@ const projects = (await getCollection('projects'))
     flex: 1;
   }
 
+  .card-desc :global(p) {
+    margin-bottom: 0.5em;
+  }
+
+  .card-desc :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .card-desc :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .card-desc :global(strong),
+  .card-desc :global(em) {
+    color: inherit;
+  }
+
   .card-footer {
     display: flex;
     align-items: center;
@@ -189,6 +205,33 @@ const projects = (await getCollection('projects'))
     display: flex;
     gap: 8px;
     align-items: center;
+  }
+
+  .link-pill {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    background: var(--accent-subtle);
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .link-pill:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  .link-pill-accent {
+    color: var(--accent);
+    background: var(--accent-subtle);
+    border-color: var(--divider);
+  }
+
+  .link-pill-accent:hover {
+    border-color: var(--accent);
   }
 
   @media (max-width: 640px) {
