@@ -36,7 +36,6 @@ ALWAYS prefer use commands in this format unless you have a good reason not to, 
 - Node v24.14.0
 - Playwright v1.58.x
 - Wrangler v4.75.x
-- Cloudflare Workers
 - See package.json and package-lock.json for dependency versions
 
 ## Documentation
